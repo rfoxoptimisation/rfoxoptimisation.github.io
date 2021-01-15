@@ -281,6 +281,38 @@ p.readmore {
   }
 }
 
+/* category/topic filters on homepage */
+.filters {
+  margin-bottom: 2em;
+}
+
+.filters button {
+  text-transform: lowercase;
+  margin: 2px;
+  background-color: #f6f6f6;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  color: #999 !important;
+}
+
+.filters button:hover {
+}
+
+.filters button:active {
+}
+
+/* styling for 'All' category button */
+.filters button:first-child {
+  // padding: 10px;
+}
+
+/* styling for other category buttons */
+.filters button:not(first-child) {
+  // padding: 10px;
+}
+
 /* author info */
 
 .author {

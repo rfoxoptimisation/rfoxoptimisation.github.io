@@ -45,14 +45,27 @@ title: "R Fox Data - A personal data blog for Ryan Fox"
     <h1>
       Recent posts
     </h1>
+
+    <div class="filters">
+      <button id="All" onclick="filterUsingCategory('All')">
+        all posts
+      </button>
+      {% assign categories = site.categories | sort %}
+      {% for category in categories %}
+      {% assign cat = category | first %}
+      <button id="{{ cat | lowercase }}" onclick="filterUsingCategory(this.id)">
+        {{ cat }}
+      </button>
+      {% endfor %}
+    </div>
   </div>
 
   <div class="post-list">
-
+    {% assign id = 0 %}
     {% for post in site.posts limit:10%}
 
-
-    <article class="post_card post">
+    {% assign id = id | plus:1 %}
+    <article class="post_card post" id="{{id}}">
       <header class="post_header">
 
         <h2 class="post_title"><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title}}</a></h2>
@@ -95,5 +108,23 @@ title: "R Fox Data - A personal data blog for Ryan Fox"
     <div class="pagination older-post"><a href="./archive"><data data-icon="ei-arrow-right"></data> More posts </a>
     </div>
   </div>
+
+  <!-- Javascript function to control button filters -->
+  <script type="text/javascript">
+    function filterUsingCategory(selectedCategory) {
+      var id = 0;
+      {% for post in site.posts %}
+        var postCategory = {{ post.categories | jsonify }}
+
+        var postDiv = document.getElementById(++id);
+        postDiv.style.display =
+          // if category is all OR post's category is the selected
+          (selectedCategory == 'All' || postCategory.includes(selectedCategory))
+          // condition ? exprIfTrue : exprIfFalse 
+            ? 'unset' // Inherit display property if true
+            : 'none'; // Else display: none
+      {% endfor %}
+    }
+  </script>
 
 </div>
